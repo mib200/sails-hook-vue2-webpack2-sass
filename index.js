@@ -14,6 +14,7 @@ var plugins = [
 	// prevents the inclusion of duplicate code into your bundle
 	new webpack.optimize.DedupePlugin(),
 	new WriteFilePlugin()
+	new webpack.NoErrorsPlugin(),
 ];
 
 if (debug) {
@@ -99,6 +100,7 @@ exports.default = function (sails) {
 				port: 3000,
 				// enable Hot Module Replacement with dev-server
 				hot: true,
+				noInfo: true,
 				// sails.js public path
 				contentBase: path.resolve(__dirname, '../../.tmp/public/'),
 				// bypass sails.js server
