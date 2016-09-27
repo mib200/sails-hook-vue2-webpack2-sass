@@ -14,7 +14,10 @@
 		"sails",
 		"sails-hook",
 		"vue",
-		"webpack"
+		"vue2",
+		"webpack",
+		"webpack2",
+		"sass"
 	],
 	"author": "Manish Kumar <mib200@gmail.com>",
 	"license": "MIT",
