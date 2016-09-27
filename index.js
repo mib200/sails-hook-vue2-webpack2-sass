@@ -13,8 +13,26 @@ var entry = [
 var plugins = [
 	// prevents the inclusion of duplicate code into your bundle
 	new webpack.optimize.DedupePlugin(),
-	new WriteFilePlugin()
+	new WriteFilePlugin(),
 	new webpack.NoErrorsPlugin(),
+	new webpack.LoaderOptionsPlugin({
+		// minimize: config.enabled.minify,
+		debug: debug,
+		stats: {
+			colors: true
+		},
+		// quiet: true,
+		options: {
+			context: __dirname,
+			vue: {
+				postcss: [
+					require('autoprefixer')({
+						browsers: ['last 2 versions']
+					})
+				]
+			},
+		}
+	})
 ];
 
 if (debug) {
@@ -53,10 +71,9 @@ exports.default = function (sails) {
 				publicPath: '/',
 				filename: 'mobile/js/build/bundle.js'
 			},
-			resolveLoader: {
-				root: path.join(__dirname, '../../node_modules')
-			},
-			debug: debug,
+			// resolveLoader: {
+			// 	root: path.join(__dirname, '../../node_modules')
+			// },
 			plugins: plugins,
 			module: {
 				loaders: [ // not all are necessary, choose wisely
@@ -77,14 +94,6 @@ exports.default = function (sails) {
 						test: /\.scss$/,
 						loaders: ["style", "css", "sass"]
 					}
-				]
-			},
-			vue: {
-				// loaders: utils.cssLoaders(),
-				postcss: [
-					require('autoprefixer')({
-						browsers: ['last 2 versions']
-					})
 				]
 			},
 			devtool: '#eval-source-map'
